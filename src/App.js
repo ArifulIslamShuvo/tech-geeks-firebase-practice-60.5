@@ -9,6 +9,7 @@ import { createContext, useState } from "react";
 import Signup from "./Components/Signup/Signup";
 import NotFound from "./Components/NotFound/NotFound";
 import toast, { Toaster } from 'react-hot-toast';
+import RequireAuth from "./Components/RequireAuth/RequireAuth";
 
 export const BlogContext = createContext();
 
@@ -21,8 +22,12 @@ function App() {
       <Toaster />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/videos' element={<Videos />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/videos' element={
+              <RequireAuth>
+                  <Videos />
+              </RequireAuth>
+            } /> 
+        <Route path='/login' element={<Login></Login>} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/blog/:id' element={<BlogDetails />} />
         <Route path='*' element={<NotFound />} />

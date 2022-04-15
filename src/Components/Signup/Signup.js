@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GoogleLogo from "../../Assets/Image/google.svg";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from '../../Firebase/Firebase.init'
+import { auth } from '../../Firebase/Firebase.init';
 import toast from "react-hot-toast";
 
 const provider = new GoogleAuthProvider();
@@ -13,6 +13,8 @@ const Signup = () => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
   const [confirmPassword, setConfirmPassword] = useState({ value: "", error: "" });
+
+  
   // console.log(email);
 
   const googleAuth = () => {

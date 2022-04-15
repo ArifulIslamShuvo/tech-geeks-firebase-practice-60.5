@@ -1,21 +1,27 @@
 import React from "react";
 import "./AuthForm.css";
 import GoogleLogo from "../../Assets/Image/google.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import auth from "../../Firebase/Firebase.init";
+import auth  from "../../Firebase/Firebase.init";
 
 const Provider = new GoogleAuthProvider();
 
 const Login = () => {
   const navigate = useNavigate();
+  
+  const location = useLocation()
+  const from = location.state?.from?.pathname || "/";
+
+
 
   const googleAuth = () => {
   signInWithPopup(auth, Provider)
   .then((result) => {
     const user = result.user;
-    console.log(user);
+    // console.log(user);
     navigate("/")
+    navigate(from, { replace: true });
 
   }).catch((error) => {
     const errorMessage = error.message;
@@ -32,9 +38,8 @@ const handleLogout  = event => {
 
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
     const user = userCredential.user;
-    console.log(user);
+    navigate("/")
   })
   .catch((error) => {
     const errorCode = error.code;
